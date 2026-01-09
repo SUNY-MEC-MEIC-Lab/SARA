@@ -83,7 +83,3 @@ SARA produces two main files in the `out_dir`:
 1. `pairs.csv`: Detailed list of selected pairs with scores (indices, score, overlap, parallax).
 2. `pairs_for_matcher.jsonl`: Simplified list of pairs formatted for feature matchers.
 3. `sara_matches.h5`: (Optional) HDF5 file containing the sparse matches found during the SARA verification step.
-
-## License
-
-[Insert License Here]
