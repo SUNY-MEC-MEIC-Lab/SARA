@@ -1,0 +1,8 @@
+numpy
+torch
+timm
+pillow
+pandas
+h5py
+scipy
+opencv-python
