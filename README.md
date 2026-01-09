@@ -4,8 +4,13 @@ SARA is a graph-based pair selection strategy for Structure-from-Motion (SfM). I
 
 ## Installation
 
-1. Clone or download this repository.
-2. Install the required dependencies:
+Clone this repository.
+
+```bash
+git clone https://github.com/SUNY-MEC-MEIC-Lab/SARA.git
+```
+
+Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -20,9 +25,10 @@ pip install -r requirements.txt
 
 ## Usage
 
-### 1. Prepare Features (ALIKED)
+### 1. Prepare Local Features
 
-SARA currently relies on **ALIKED** features. Before running SARA, you must extract features for your images and save them as `.npz` files.
+SARA is designed to work with **Deep Learned Detectors** (e.g., ALIKED, SuperPoint, DISK, etc.).
+Before running SARA, you must extract features for your images and save them as `.npz` files in the standard format described below.
 
 **Directory Structure:**
 
@@ -33,7 +39,7 @@ SARA currently relies on **ALIKED** features. Before running SARA, you must extr
 │   ├── img2.jpg
 │   └── ...
 └── output/
-    └── features/   <-- Create this manually or via extraction script
+    └── features/   <-- Create this manually or via your extraction script
         ├── img1.npz
         ├── img2.npz
         └── ...
@@ -44,8 +50,10 @@ Each `.npz` file must correspond to an image stem (e.g., `img1.jpg` -> `img1.npz
 
 - `keypoints`: `(N, 2)` float32 array
 - `descriptors`: `(N, D)` float32 array
-- `scores`: `(N,)` float32 array
+- `scores`: `(N,)` float32 array (detection scores)
 - `image_shape`: `(H, W)` tuple (optional, but recommended)
+
+*Note: SARA computes descriptors similarity based on the metric specified in arguments (default: cosine similarity, suitable for normalized deep descriptors).*
 
 ### 2. Run SARA
 
@@ -66,6 +74,7 @@ python run_sara.py --img_dir /path/to/project/images --out_dir /path/to/project/
 
 - `--tau_overlap`: Minimum overlap score (default: 0.10).
 - `--tau_parallax`: Minimum parallax angle score (default: 0.05).
+- `--descriptor_metric`: Metric for feature comparison (`cosine` or `l2`). Use `cosine` for most deep features (ALIKED, SuperPoint).
 
 ### Output
 
@@ -74,3 +83,7 @@ SARA produces two main files in the `out_dir`:
 1. `pairs.csv`: Detailed list of selected pairs with scores (indices, score, overlap, parallax).
 2. `pairs_for_matcher.jsonl`: Simplified list of pairs formatted for feature matchers.
 3. `sara_matches.h5`: (Optional) HDF5 file containing the sparse matches found during the SARA verification step.
+
+## License
+
+[Insert License Here]

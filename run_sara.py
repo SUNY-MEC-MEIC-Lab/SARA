@@ -101,7 +101,7 @@ def main():
         
     except FileNotFoundError as e:
         logger.error(f"File not found error: {e}")
-        logger.error("Ensure ALIKED features are extracted and placed in '{out_dir}/features/' as .npz files.")
+        logger.error("Ensure local features (keypoints, descriptors) are extracted and placed in '{out_dir}/features/' as .npz files.")
         logger.error("Expected format per image: {stem}.npz containing 'keypoints', 'descriptors', 'scores'.")
         sys.exit(1)
     except Exception as e:

@@ -9,7 +9,7 @@ import numpy as np
 
 from .config import SARAConfig
 from .dino_embed import compute_or_load_embeddings
-from .aliked_io import ensure_aliked_features
+from .feature_loader import ensure_features
 from .candidates import knn_candidates
 from .mini_ransac import mutual_nn, estimate_F_mini_ransac
 from .parallax import parallax_proxy
@@ -88,7 +88,7 @@ def run_SARA(cfg: SARAConfig) -> Dict[str, List[Tuple[str, str, float, float, fl
     embeddings = compute_or_load_embeddings(cfg.img_dir, cfg.out_dir, device=cfg.device)
     if allowed_stems is not None and embeddings:
         embeddings = {stem: emb for stem, emb in embeddings.items() if stem in allowed_stems}
-    features = ensure_aliked_features(cfg.img_dir, cfg.out_dir, allowed_stems=allowed_stems)
+    features = ensure_features(cfg.img_dir, cfg.out_dir, allowed_stems=allowed_stems)
 
     nodes = sorted(set(embeddings.keys()) & set(features.keys()))
     if len(nodes) < 2:
