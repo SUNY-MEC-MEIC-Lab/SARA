@@ -1,4 +1,4 @@
-# SARA: Select And Retain for Adjustment
+# SARA: Scene Aware Reconstruction Accelerator
 
 SARA is a graph-based pair selection strategy for Structure-from-Motion (SfM). It efficiently selects optimal image pairs by evaluating geometric overlap and parallax using a lightweight "mini-RANSAC" and GPU-accelerated batch processing.
 
